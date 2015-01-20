@@ -7,3 +7,7 @@
   $app->get('/hiekkalaatikko', function() {
     HelloWorldController::sandbox();
   });
+
+  $app->get('/login', function() {
+    HelloWorldController::login();
+  });
