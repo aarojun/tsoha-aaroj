@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Lisää uusi tuote</h1>
+
+  <form>
+    <div class="checkbox">
+      <label>
+        <input type="checkbox">
+        Saatavilla
+      </label>
+    </div>
+    <div class="form-group">
+      <label>Nimi</label>
+      <input type="text" class="form-control" value="">
+    </div>
+    <div class="form-group">
+      <label>Hinta</label>
+      <input type="text" class="form-control" value="">
+    </div>
+    <div class="form-group">
+      <label>Tuotetyyppi</label>
+      <input type="text" class="form-control" value="">
+    </div>
+    <div class="form-group">
+      <label>Valmistaja</label>
+      <input type="text" class="form-control" value="">
+    </div>
+    <div class="form-group">
+      <label>Valmistusmaa</label>
+      <input type="text" class="form-control" value="">
+    </div>
+    <div class="form-group">
+      <label>Kuvaus</label>
+      <textarea class="form-control">
+      </textarea>
+    </div>
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary">Tallenna</button>
+    </div>
+  </form>
+{% endblock %}

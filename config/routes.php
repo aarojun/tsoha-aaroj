@@ -12,6 +12,22 @@
     HelloWorldController::login();
   });
 
-  $app->get('/tuotteet', function() {
-    HelloWorldController::tuotteet();
+  $app->get('/tuotelista', function() {
+    HelloWorldController::tuotelista();
+  });
+
+  $app->get('/ostoskassi', function() {
+    HelloWorldController::ostoskassi();
+  });
+
+  $app->get('/product_show', function() {
+    HelloWorldController::product_show();
+  });
+
+  $app->get('/product_modify', function() {
+    HelloWorldController::product_modify();
+  });
+
+  $app->get('/product_add', function() {
+    HelloWorldController::product_add();
   });

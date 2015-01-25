@@ -15,7 +15,23 @@
     	self::render_view('suunnitelmat/login.html');
     }
 
-    public static function tuotteet(){
-      self::render_view('suunnitelmat/tuotteet.html');
+    public static function tuotelista(){
+      self::render_view('suunnitelmat/tuotelista.html');
+    }
+
+    public static function ostoskassi(){
+      self::render_view('suunnitelmat/ostoskassi.html');
+    }
+
+    public static function product_show(){
+      self::render_view('suunnitelmat/product_show.html');
+    }
+
+    public static function product_modify(){
+      self::render_view('suunnitelmat/product_modify.html');
+    }
+
+    public static function product_add(){
+      self::render_view('suunnitelmat/product_add.html');
     }
   }
