@@ -16,5 +16,5 @@ Ostoskassi - [linkki valmiiseen aiheeseen](http://advancedkittenry.github.io/suu
 * [Tuotteen muokkaussivu](https://aarojunt.users.cs.helsinki.fi/tsoha-aaroj/product_modify)
 * [Sivu tuotteiden lisäämiselle](https://aarojunt.users.cs.helsinki.fi/tsoha-aaroj/product_add)
 * 
-* [Ostoskassi -sivu jossa listataan tilattavat tuotteet](https://aarojunt.users.cs.helsinki.fi/tsoha-aaroj/ostoskassi.html)
+* [Ostoskassi -sivu jossa listataan tilattavat tuotteet](https://aarojunt.users.cs.helsinki.fi/tsoha-aaroj/ostoskassi)
 * [Sivu järjestelmään kirjautumiseen](https://aarojunt.users.cs.helsinki.fi/tsoha-aaroj/login)
