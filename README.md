@@ -10,11 +10,11 @@ Yleisiä linkkejä:
 Ostoskassi - [linkki valmiiseen aiheeseen](http://advancedkittenry.github.io/suunnittelu_ja_tyoymparisto/aiheet/Ostoskassi.html) 
 
 
-Viikon 2 palautus:
-* [Linkki tuotteiden listaussivulle](https://aarojunt.users.cs.helsinki.fi/tsoha-aaroj/tuotelista.html)
-* [Linkki tuotteen esittelysivulle](https://aarojunt.users.cs.helsinki.fi/tsoha-aaroj/product_show.html)
-* [Linkki muokkaussivulle](https://aarojunt.users.cs.helsinki.fi/tsoha-aaroj/product_modify.html)
-* [Linkki lisäyssivulle](https://aarojunt.users.cs.helsinki.fi/tsoha-aaroj/product_add.html)
+## Toteutetut sivut - suunnitelmavaihe (Viikko 2)
+* [Tuotteiden listaussivu](https://aarojunt.users.cs.helsinki.fi/tsoha-aaroj/tuotelista.html)
+* [Tuotteen esittelysivu](https://aarojunt.users.cs.helsinki.fi/tsoha-aaroj/product_show.html)
+* [Tuotteen muokkaussivu](https://aarojunt.users.cs.helsinki.fi/tsoha-aaroj/product_modify.html)
+* [Sivu tuotteiden lisäämiselle](https://aarojunt.users.cs.helsinki.fi/tsoha-aaroj/product_add.html)
 * 
-* [Linkki ostoskassi-sivulle](https://aarojunt.users.cs.helsinki.fi/tsoha-aaroj/ostoskassi.html)
-* [Linkki kirjautumis-sivulle](https://aarojunt.users.cs.helsinki.fi/tsoha-aaroj/login.html)
+* [Ostoskassi -sivu jossa listataan tilattavat tuotteet](https://aarojunt.users.cs.helsinki.fi/tsoha-aaroj/ostoskassi.html)
+* [Sivu järjestelmään kirjautumiseen](https://aarojunt.users.cs.helsinki.fi/tsoha-aaroj/login.html)
