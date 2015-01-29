@@ -11,7 +11,7 @@ INSERT INTO FlightInformation (flightid, seat) VALUES ('BEO-027', 56);
 INSERT INTO ProductType (name) VALUES ('testi');
 
 -- Product-taulun testidata
-INSERT INTO Product (name, type, available, price, added) VALUES ('Toblerone suklaa', 'testi', 7, 3.00, NOW());
+INSERT INTO Product (name, type, available, price, added) VALUES ('Toblerone suklaa', 'testi', 7, 3.00, NOW()) RETURNING id;
 INSERT INTO Product (name, type, available, price, added) VALUES ('Kirja', 'testi', 7, 3.00, NOW());
 
 -- Tilaus-taulun testidata

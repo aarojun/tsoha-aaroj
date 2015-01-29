@@ -1,20 +1,27 @@
 {% extends "base.html" %}
 
 {% block content %}
+  {% if message is not null %}
+  <div class="alert alert-success">
+    {{message}}
+  </div>
+  {% endif %}
   <!-- Painikkeet tähän -->
   <p>
     <a href="{{base_path}}/product/{{product.id}}/addtocart" class="btn btn-default">Lisää ostoskassiin</button> <a href="{{base_path}}/product/{{product.id}}/edit" class="btn btn-default">Muokkaa</a>
   </p>
   <h1>{{product.name}}</h1>
+  <h4>tuotetyyppi: <a href="{{base_path}}/product&type={{product.type}}"><strong>{{product.type}}</strong></a></h2>
   <!-- Tiedot tulee listana tähän -->
   <ul>
-    <li><strong>Hinta: </strong>{{product.price}}</li>
-    <li><strong>Tuotetyyppi: </strong>{{product.type}}</li>
+    <li><strong>Hinta: € </strong>{{product.price}}</li>
+    <li><strong>Tuotetyyppi: </strong><a href="{{base_path}}/product&type={{product.type}}">{{product.type}}</a></li>
     <li><strong>Valmistaja: </strong>{{product.producer}}</li>
     <li><strong>Valmistusmaa: </strong>{{product.countryoforigin}}</li>
-    <li><strong>Saatavilla: </strong>~ {{product.available}}</li>
+    <li><strong>Saatavilla: ~ </strong>{{product.available}}</li>
   </ul>
-  <!-- Kuvaus tulee tähän -->
+
+  Tuotteen kuvaus:
   <p>{{product.description}}
   </p>
 {% endblock %}

@@ -4,6 +4,18 @@
     ProductController::index();
   });
 
+  $app->post('/product', function(){
+    ProductController::store();
+  });
+
+  $app->get('/product/new', function(){
+    ProductController::create();
+  });
+
+  $app->get('/product&type=:type', function($type) {
+    ProductController::indexByType($type);
+  });
+
   $app->get('/product', function() {
     ProductController::index();
   });
