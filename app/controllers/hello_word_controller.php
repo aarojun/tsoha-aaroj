@@ -1,14 +1,25 @@
 <?php
 
+// luokka-riippuvuudet hallittu composer.json -riippuvuuksienhallitsijassa (vko3)
+
   class HelloWorldController extends BaseController{
 
     public static function index(){
-   	  self::render_view('suunnitelmat/etusivu.html');
+   	  self::render_controller('product/index.html');
     }
 
     public static function sandbox(){
       // Testaa koodiasi täällä	
-      self::render_view('helloworld.html');
+
+      //testaa product-mallin kaikkien olioiden haku
+      $products = Product::all();
+
+      print_r($products);
+
+      //testaa product-mallin yhden olion haku ('id' mukaan)
+      $product2 = Product::find(2);
+
+      print_r($product2);
     }
 
     public static function login(){

@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Myynnissä olevat Tax-free tuotteet</h1>
+
+  <p>
+    <a href="{{base_path}}/product/add" class="btn btn-success">Lisää tuote</a>
+  </p>
+
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th>Nimi</th>
+        <th>Hinta</th>
+        <th>Tuotetyyppi</th>
+        <th>Valmistaja</th>
+        <th>Valmistusmaa</th>
+        <th>Saatavilla</th>
+        <th>Lisätty</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <!-- Listataan tietokannassa olevat tuotteet tähän -->
+      {% for product in products %}
+      <tr>
+        <td><a href="{{base_path}}/product/{{product.id}}">{{product.name}}</a></td>
+        <td>{{product.price}}</td>
+        <td>{{product.type}}</td>
+        <td>{{product.producer}}</td>
+        <td>{{product.countryoforigin}}</td>
+        <td>~ {{product.available}}</td>
+        <td>{{product.added}}</td>
+        <th><a class="btn btn-default btn-sm" href="{{base_path}}/product/{{product.id}}/addtocart">Lisää ostoskassiin</a></th>
+        <th><a class="btn btn-default btn-sm" href="{{base_path}}/product/{{product.id}}/edit">Muokkaa</a></th>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

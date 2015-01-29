@@ -1,10 +1,19 @@
 <?php
 
   $app->get('/', function() {
-    HelloWorldController::index();
+    ProductController::index();
+  });
+
+  $app->get('/product', function() {
+    ProductController::index();
+  });
+
+  $app->get('/product/:id', function($id) {
+    ProductController::show($id);
   });
 
   $app->get('/hiekkalaatikko', function() {
+    //koodin testaamiseen
     HelloWorldController::sandbox();
   });
 

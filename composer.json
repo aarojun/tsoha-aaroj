@@ -4,6 +4,7 @@
 			"lib/",
 			"vendor/Slim/Slim.php",
 			"vendor/Twig/lib/Twig/Autoloader.php",
+			"app/models",
 			"app/controllers"
 		]
 	}
