@@ -6,7 +6,8 @@ source $DIR/config/environment.sh
 echo "Transfering files to server..."
 
 # Tämä komento siirtää tiedostot palvelimelta
-rsync -r $DIR/app $DIR/assets $DIR/config $DIR/lib $DIR/sql $DIR/vendor $DIR/index.php $DIR/composer.json $USERNAME@users.cs.helsinki.fi:htdocs/$PROJECT_FOLDER
+# $DIR/vendor poistettu
+rsync -r $DIR/app $DIR/assets $DIR/config $DIR/lib $DIR/sql $DIR/index.php $DIR/composer.json $USERNAME@users.cs.helsinki.fi:htdocs/$PROJECT_FOLDER
 
 echo "Done!"
 

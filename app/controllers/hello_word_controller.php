@@ -12,14 +12,26 @@
       // Testaa koodiasi täällä	
 
       //testaa product-mallin kaikkien olioiden haku
-      $products = Product::all();
+      //$products = Product::all();
 
-      print_r($products);
+      //print_r($products);
 
       //testaa product-mallin yhden olion haku ('id' mukaan)
-      $product2 = Product::find(2);
+      //$product2 = Product::find(2);
 
-      print_r($product2);
+      //print_r($product2);
+
+     // testataan Product:n create() -metodi valmiiksi luodulle array:lle
+      $row = array();
+      $row['name'] = 'omena';
+      $row['type'] = 'testi';
+      $row['price'] = 1.00;
+      $row['available'] = 7;
+      $row['producer'] = 'puu';
+      $row['description'] = 'omena';
+      $row['countryoforigin'] = 'omena';
+
+      Product::create($row);
     }
 
     public static function login(){

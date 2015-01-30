@@ -8,8 +8,16 @@
     ProductController::store();
   });
 
+  $app->post('/product_type', function(){
+    ProductTypeController::store();
+  });
+
   $app->get('/product/new', function(){
     ProductController::create();
+  });
+
+  $app->get('/product_type/new', function(){
+    ProductTypeController::create();
   });
 
   $app->get('/product&type=:type', function($type) {
