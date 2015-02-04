@@ -7,6 +7,16 @@ class Product extends BaseModel {
 	public function __construct($attributes) {
 	  parent::__construct($attributes);
 
+    $this->validators = array(
+      'validate_name', 
+      'validate_type', 
+      'validate_price',
+      'validate_available',
+      'validate_producer',
+      'validate_description',
+      'validate countryoforigin',
+      'validate_added',
+      'validate_updated');
 	}
 
     // käy kyselyiden tuottamat rivit läpi ja palauttaa listan product-olioita

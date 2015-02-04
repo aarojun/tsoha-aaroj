@@ -17,13 +17,21 @@ class ProductTypeController extends BaseController{
 	public static function store() {
 		$params = $_POST;
 
-		// lisää validointi!
-		$matchingtypes = ProductType::findUsedNames($params['name']);
-		if ($matchingtypes == null) {
+		// toteutetaan validointi syötteelle
+
+		$productType = new ProductType($params);
+
+	    // kaatuu seuraavaan!!
+		$errors = $productType->$errors();
+		$messages = array();
+		
+		if ($errors == null) {
+	      // syöte on validi, luodaan tuotetyyppi
           $id = ProductType::create($params);
-          self::redirect_to('/product_type/new', array('message' => 'Tuotetyyppi ' . $id . ' on lisätty tietokantaan'));
+          $messages[] = 'Tuotetyyppi ' . $id . ' on lisätty tietokantaan';
+          self::redirect_to('/product_type/new', array('messages' => $messages));
 		} else {
-		  self::redirect_to('/product_type/new', array('alert' => 'Tuotetyyppi ' . $params['name'] . ' on jo olemassa!'));
+		  self::render_view('/product_type/new.html', array('errors' => $errors, 'params' => $params));
 	   }
     }
 

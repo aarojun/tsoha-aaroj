@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+  {% block form_header %}{% endblock %}
+
+  {% if errors %}
+       <div class="alert alert-danger">
+        <ul>
+          {% for error in errors %}
+            <li>{{error}}</li>
+          {% endfor %}
+        </ul>
+       </div>
+  {% endif %}
+
+  {% if messages %}
+       <div class="alert alert-success">
+        <ul>
+          {% for message in messages %}
+            <li>{{message}}</li>
+          {% endfor %}
+        </ul>
+       </div>
+  {% endif %}
+
+  {% block form_fields %}{% endblock %}
+
+{% endblock %}

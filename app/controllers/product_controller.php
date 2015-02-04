@@ -26,10 +26,21 @@ class ProductController extends BaseController{
 		$params['price'] = floatval($params['price']);
 		$params['available'] = intval($params['available']);
 
-		// lisää validointi!
+		// toteutetaan validointi syötteelle
 
-		$id = Product::create($params);
-		self::redirect_to('/product/' . $id, array('message' => 'Tuote ' . $id . ' on lisätty tietokantaan'));
+		$product = new Product($params);
+
+		$errors = $game->errors();
+		$messages = array();
+
+		if(count($errors) == 0) {
+			// syöte on validi, luodaan tuote
+            $id = Product::create($params);
+            $messages[] = 'Tuote ' . $id . ' on lisätty tietokantaan';
+            self::redirect_to('/product/' . $id, array('messages' => $messages));
+		} else {
+			self::redirect_to('/product/new' . $id, array('errors' => $errors, 'params' => $params));
+		}
     }
 
 	public static function create() {

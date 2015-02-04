@@ -7,7 +7,9 @@ class ProductType extends BaseModel {
 	public function __construct($attributes) {
 	  parent::__construct($attributes);
 
-	}
+    $this->validators = array('validate_name');
+  }
+	
 
     // käy kyselyiden tuottamat rivit läpi ja palauttaa listan product-olioita
 	public static function formProductTypes($rows) {
@@ -52,6 +54,24 @@ class ProductType extends BaseModel {
     }
 
     return null;
+  }
+
+  public function validate_name() {
+    $errors = array();
+
+    if ($this->name == '' || $this->name == null) {
+      $errors[] = 'Nimi ei saa olla tyhjä';
+    }
+    if (strlen($this->name) < 4) {
+      $errors[] = 'Nimen pituuden tulee olla vähintään neljä merkkiä';
+    }
+
+    $matchingtypes = self::findUsedNames($this->name);
+    if ($matchingtypes) {
+      $errors[] = 'Tuotetyyppi nimeltä' . $this->name . 'on jo olemassa!';    
+    }
+
+    return $errors;
   }
 
 }
