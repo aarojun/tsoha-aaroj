@@ -19,13 +19,15 @@
       // Lisätään $errors muuttujaan kaikki virheilmoitukset taulukkona
       $errors = array();
 
-      foreach($this->validators as $validator){
-        // Kutsutaan validointimetodia ja lisätään sen palauttamat virheet taulukkoon
-        $newerrers = array();
+      if ($this->validators) {
+        foreach($this->validators as $validator){
+          // Kutsutaan validointimetodia ja lisätään sen palauttamat virheet taulukkoon
+          $newerrors = array();
         
-        $newerrors = $this->{$validator}();
-        $errors = array_merge($errors, $newerrors);
+          $newerrors = $this->{$validator}();
+          $errors = array_merge($errors, $newerrors);
       }
+    }
 
       return $errors;
     }

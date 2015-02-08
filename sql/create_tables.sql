@@ -22,13 +22,13 @@ CREATE TABLE Administrator(
 
 CREATE TABLE ProductType(
   id SERIAL PRIMARY KEY,
-  name varchar(50) UNIQUE NOT NULL
+  name varchar(10) UNIQUE NOT NULL
 );
 
 CREATE TABLE Product(
   id SERIAL PRIMARY KEY,
   name varchar(50) NOT NULL ,
-  type varchar(50) REFERENCES ProductType(name),
+  type varchar(50) REFERENCES ProductType(id),
   price NUMERIC,
   available INTEGER NOT NULL,
   producer varchar(50),

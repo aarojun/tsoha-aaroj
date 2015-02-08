@@ -9,6 +9,11 @@ class ProductType extends BaseModel {
 
     $this->validators = array('validate_name');
   }
+
+  public function errors() {
+    // tarpeeton?
+    return parent::errors();
+  }
 	
 
     // käy kyselyiden tuottamat rivit läpi ja palauttaa listan product-olioita
@@ -68,7 +73,7 @@ class ProductType extends BaseModel {
 
     $matchingtypes = self::findUsedNames($this->name);
     if ($matchingtypes) {
-      $errors[] = 'Tuotetyyppi nimeltä' . $this->name . 'on jo olemassa!';    
+      $errors[] = 'Tuotetyyppi nimeltä ' . $this->name . ' on jo olemassa!';    
     }
 
     return $errors;

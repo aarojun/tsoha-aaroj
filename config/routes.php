@@ -12,6 +12,30 @@
     ProductTypeController::store();
   });
 
+  $app->post('/product/:id/edit', function($id){
+    ProductController::update($id);
+  });
+
+  $app->post('/product_type/:id/edit', function($id){
+    ProductTypeController::update($id);
+  });
+
+  $app->post('/product/:id/destroy', function($id){
+    ProductController::destroy($id);
+  });
+
+  $app->post('/product_type/:id/destroy', function($id){
+    ProductTypeController::destroy($id);
+  });
+
+  $app->get('/product/:id/edit', function($id){
+    ProductController::edit($id);
+  });
+
+  $app->get('/product_type/:id/edit', function($id){
+    ProductTypeController::edit($id);
+  });
+
   $app->get('/product/new', function(){
     ProductController::create();
   });

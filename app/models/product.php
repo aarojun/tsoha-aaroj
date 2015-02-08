@@ -17,7 +17,16 @@ class Product extends BaseModel {
       'validate countryoforigin',
       'validate_added',
       'validate_updated');
+
+    // lisää validaattori-metodit!
+
+    $this->validators = null;
 	}
+
+  public function errors() {
+    // tarpeeton?
+    return parent::errors();
+  }
 
     // käy kyselyiden tuottamat rivit läpi ja palauttaa listan product-olioita
 	public static function formProducts($rows) {
@@ -34,17 +43,31 @@ class Product extends BaseModel {
   	  $query = DB::query("INSERT INTO Product (name, type, price, available, producer, description, countryoforigin, added, updated) 
   		    VALUES(
   		    :name,
-  			:type,
-  			:price,
-  			:available,
-  			:producer,
-  			:description,
-  			:countryoforigin,
-  			NOW(),
-  			NOW())
+          :type,
+          :price,
+          :available,
+          :producer,
+          :description,
+          :countryoforigin,
+          NOW(),
+          NOW())
   	        RETURNING id", $row);
 
   	return $query[0]['id'];
+  }
+
+  public static function update($row) {
+    $query = DB::query("UPDATE Product 
+          SET(
+            name=:name,
+            type=:type,
+            price=:price,
+            available=:available,
+            producer=:producer,
+            description=:description,
+            countryoforigin=:countryoforigin,
+            updated=NOW()) 
+          WHERE id = :entry_id", $row);
   }
 
   public static function all() {

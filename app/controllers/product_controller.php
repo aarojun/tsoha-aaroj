@@ -8,7 +8,7 @@ class ProductController extends BaseController{
 		self::render_view('product/index.html', array('products' => $products));
 	}
 
-	public static function indexByType($type) {
+	public static function indexByType($typeName) {
 		$products = Product::matchesType($type);
 
 		self::render_view('product/index.html', array('products' => $products, 'type' => $type));
@@ -30,10 +30,10 @@ class ProductController extends BaseController{
 
 		$product = new Product($params);
 
-		$errors = $game->errors();
+		$errors = $product->errors();
 		$messages = array();
 
-		if(count($errors) == 0) {
+		if($errors == null) {
 			// syöte on validi, luodaan tuote
             $id = Product::create($params);
             $messages[] = 'Tuote ' . $id . ' on lisätty tietokantaan';
@@ -43,9 +43,49 @@ class ProductController extends BaseController{
 		}
     }
 
+    public static function update($id) {
+		$params = $_POST;
+
+        $params['entry_id'] = $id;
+		$params['price'] = floatval($params['price']);
+		$params['available'] = intval($params['available']);
+
+		// toteutetaan validointi syötteelle
+
+		$product = Product::find($id);
+
+		$errors = $product->errors();
+		$messages = array();
+
+		if($errors == null) {
+			// syöte on validi, luodaan tuote
+            $id = Product::update($params);
+            $messages[] = 'Tuote ' . $id . ' on päivitetty';
+            self::redirect_to('/product/' . $id, array('messages' => $messages));
+		} else {
+			self::redirect_to('/product/' . $id . '/edit', array('errors' => $errors, 'params' => $params));
+		}
+    }
+
 	public static function create() {
 		$productTypes = ProductType::all();
-		self::render_view('product/new.html', array('types' => $productTypes));
+		self::render_view('/product/new.html', array('types' => $productTypes));
 	}
 
+	public static function edit($id) {
+		$productTypes = ProductType::all();
+		$product = Product::find($id);
+
+		if($product) {
+		  self::render_view('product/edit.html', array('params' => $product, 'types' => $productTypes));
+	    } else {
+	    	$errors = array();
+	    	$errors[] = "Tuotetta " . $id . " ei ole olemassa.";
+          self::redirect_to('/product/new', array('errors' => $errors));
+	    }
+	}
+
+    public static function destroy() {
+		self::redirect_to('product', array('message' => 'Tuote on poistettu onnistuneesti!'));
+	}
 }

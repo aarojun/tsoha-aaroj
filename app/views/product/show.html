@@ -8,14 +8,13 @@
   {% endif %}
   <!-- Painikkeet tähän -->
   <p>
-    <a href="{{base_path}}/product/{{product.id}}/addtocart" class="btn btn-default">Lisää ostoskassiin</button> <a href="{{base_path}}/product/{{product.id}}/edit" class="btn btn-default">Muokkaa</a>
+    <a href="{{base_path}}/product/{{product.id}}/addtocart" class="btn btn-default">Lisää ostoskassiin</button></a>
   </p>
   <h1>{{product.name}}</h1>
   <h4>tuotetyyppi: <a href="{{base_path}}/product&type={{product.type}}"><strong>{{product.type}}</strong></a></h2>
   <!-- Tiedot tulee listana tähän -->
   <ul>
     <li><strong>Hinta: € </strong>{{product.price}}</li>
-    <li><strong>Tuotetyyppi: </strong><a href="{{base_path}}/product&type={{product.type}}">{{product.type}}</a></li>
     <li><strong>Valmistaja: </strong>{{product.producer}}</li>
     <li><strong>Valmistusmaa: </strong>{{product.countryoforigin}}</li>
     <li><strong>Saatavilla: ~ </strong>{{product.available}}</li>
@@ -24,4 +23,8 @@
   Tuotteen kuvaus:
   <p>{{product.description}}
   </p>
+
+  <form method="post" action="{{base_path}}/game/{{game.id}}/destroy">
+  <a href="{{base_path}}/product/{{product.id}}/edit" class="btn btn-default">Muokkaa</a> <button type="submit" class="btn btn-danger">Poista</button>
+</form>
 {% endblock %}

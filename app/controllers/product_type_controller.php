@@ -21,8 +21,7 @@ class ProductTypeController extends BaseController{
 
 		$productType = new ProductType($params);
 
-	    // kaatuu seuraavaan!!
-		$errors = $productType->$errors();
+		$errors = $productType->errors();
 		$messages = array();
 		
 		if ($errors == null) {
@@ -37,6 +36,10 @@ class ProductTypeController extends BaseController{
 
 	public static function create() {
 		self::render_view('product_type/new.html');
+	}
+
+	public static function destroy() {
+		self::redirect_to('product_type', 'message' => 'Tuotetyyppi on poistettu onnistuneesti!'));
 	}
 
 }
