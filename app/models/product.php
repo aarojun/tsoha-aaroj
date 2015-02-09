@@ -59,13 +59,13 @@ class Product extends BaseModel {
   public static function update($row) {
     $query = DB::query("UPDATE Product 
           SET(
-            name=:name,
-            type=:type,
+            name =':name',
+            type=':type',
             price=:price,
             available=:available,
-            producer=:producer,
-            description=:description,
-            countryoforigin=:countryoforigin,
+            producer=':producer',
+            description=':description',
+            countryoforigin=':countryoforigin',
             updated=NOW()) 
           WHERE id = :entry_id", $row);
   }

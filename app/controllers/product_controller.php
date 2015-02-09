@@ -59,7 +59,7 @@ class ProductController extends BaseController{
 
 		if($errors == null) {
 			// syöte on validi, luodaan tuote
-            $id = Product::update($params);
+            Product::update($params);
             $messages[] = 'Tuote ' . $id . ' on päivitetty';
             self::redirect_to('/product/' . $id, array('messages' => $messages));
 		} else {
