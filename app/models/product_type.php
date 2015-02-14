@@ -61,8 +61,7 @@ class ProductType extends BaseModel {
     return null;
   }
 
-  public function validate_name() {
-    $errors = array();
+  public function validate_name($errors) {
 
     if ($this->name == '' || $this->name == null) {
       $errors[] = 'Nimi ei saa olla tyhjä';

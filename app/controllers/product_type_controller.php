@@ -39,7 +39,9 @@ class ProductTypeController extends BaseController{
 	}
 
 	public static function destroy() {
-		self::redirect_to('product_type', 'message' => 'Tuotetyyppi on poistettu onnistuneesti!'));
+		$messages = array();
+		$messages[] = 'Tuotetyyppi on poistettu onnistuneesti!';
+		self::redirect_to('product_type', array('messages' => $messages));
 	}
 
 }

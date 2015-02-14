@@ -14,13 +14,7 @@ class Product extends BaseModel {
       'validate_available',
       'validate_producer',
       'validate_description',
-      'validate countryoforigin',
-      'validate_added',
-      'validate_updated');
-
-    // lisää validaattori-metodit!
-
-    $this->validators = null;
+      'validate countryoforigin');
 	}
 
   public function errors() {
@@ -70,6 +64,10 @@ class Product extends BaseModel {
           WHERE id = :entry_id", $row);
   }
 
+  public static function destroy($id) {
+    $rows = DB::query('DELETE Product WHERE id = :id', array('id' = $id));
+  }
+
   public static function all() {
   	// kutsutaan luokan DB staattista metodia query
 	$rows = DB::query('SELECT * FROM Product');
@@ -81,7 +79,7 @@ class Product extends BaseModel {
     return self::formProducts($rows);
    }
 
-   public static function find($id){
+   public static function find($id) {
     $rows = DB::query('SELECT * FROM Product WHERE id = :id LIMIT 1', array('id' => $id));
 
     if(count($rows) > 0){
@@ -90,6 +88,92 @@ class Product extends BaseModel {
     }
 
     return null;
+  }
+
+  public static function findUsedNames($name) {
+    $rows = DB::query('SELECT * FROM Product WHERE name = :name', array('name' => $name));
+
+    if(count($rows) > 0){
+      $types = self::formProducts($rows);
+      return $types[0];
+    }
+
+    return null;
+   }
+
+  public function validate_name($errors) {
+    if ($this->name == '' || $this->name == null) {
+      $errors[] = 'Nimi ei saa olla tyhjä';
+    }
+    if (strlen($this->name) < 4) {
+      $errors[] = 'Tuotteen nimen pituuden tulee olla vähintään neljä merkkiä';
+    }
+
+    $matchingtypes = self::findUsedNames($this->name);
+    if ($matchingtypes) {
+      $errors[] = 'Tuote nimeltä ' . $this->name . ' on jo olemassa!';    
+    }
+
+    return $errors;
+  }
+
+  public function validate_type($errors) {
+    if ($this->type == '' || $this->type == null) {
+      $errors[] = 'Tuotetyyppi ei saa olla tyhjä';
+    }
+
+    $matchingtypes = ProductType::findUsedNames($this->type);
+    if ($matchingtypes == null) {
+      $errors[] = 'Tuotetyyppiä nimeltä ' . $this->name . ' ei ole olemassa! Syötetyn tuotetyypin täytyy olla tietokannassa.';    
+    }
+
+    return $errors;
+  }
+
+  public function validate_price($errors) {
+    if($this->price == null) {
+      $errors[] = 'Tuotteen hinnan täytyy olla määrätty!';
+    }
+
+    if($this->price < 0) {
+      $errors[] = 'Tuotteen hinta ei voi olla negatiivinen.';
+    }
+
+    return $errors;
+  }
+
+  public function validate_available($errors) {
+    //valinnainen kenttä
+
+    if($this->available && $this->available < 0) {
+      $errors[] = 'Saatavilla olevien tuotteiden määrä ei voi olla negatiivinen.';
+    }
+
+    return $errors;
+  }
+
+  public function validate_producer($errors) {
+    //valinnainen kenttä
+
+    if ($this->producer && strlen($this->producer) < 4) {
+      $errors[] = 'Tuottajan nimen pituuden tulee olla vähintään neljä merkkiä';
+    }
+
+    return $errors;
+  }
+
+  public function validate_description($errors) {
+    //valinnainen kenttä
+
+    return $errors;
+  }
+
+  public function validate_countryoforigin($errors) {
+    if ($this->countryoforigin == null || strlen($this->countryoforigin) < 5) {
+      $errors[] = 'Tuotantomaan nimen pituuden tulee olla vähintään viisi merkkiä';
+    }
+
+    return $errors;
   }
 
 }

@@ -9,7 +9,7 @@ CREATE TABLE FlightInformation(
 
 CREATE TABLE Customer(
   id SERIAL PRIMARY KEY,
-  name varchar(50) NOT NULL,
+  name varchar(50) UNIQUE NOT NULL,
   password varchar(50) NOT NULL,
   flightseating INTEGER REFERENCES FlightInformation(id)
 );
