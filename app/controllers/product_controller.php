@@ -39,22 +39,23 @@ class ProductController extends BaseController{
             $messages[] = 'Tuote ' . $id . ' on lisätty tietokantaan';
             self::redirect_to('/product/' . $id, array('messages' => $messages));
 		} else {
-			self::redirect_to('/product/new' . $id, array('errors' => $errors, 'params' => $params));
+			self::redirect_to('/product/new', array('errors' => $errors, 'params' => $params));
 		}
     }
 
     public static function update($id) {
 		$params = $_POST;
 
-        $params['entry_id'] = $id;
+        $params['id'] = $id;
 		$params['price'] = floatval($params['price']);
 		$params['available'] = intval($params['available']);
 
 		// toteutetaan validointi syötteelle
 
 		$product = Product::find($id);
+		$newproduct = new Product($params);
 
-		$errors = $product->errors();
+		$errors = $newproduct->errors();
 		$messages = array();
 
 		if($errors == null) {
@@ -85,7 +86,8 @@ class ProductController extends BaseController{
 	    }
 	}
 
-    public static function destroy() {
-		self::redirect_to('product', array('message' => 'Tuote on poistettu onnistuneesti!'));
+    public static function destroy($id) {
+    	Product::destroy($id);
+		self::redirect_to('/product', array('message' => 'Tuote on poistettu onnistuneesti!'));
 	}
 }

@@ -14,7 +14,7 @@ class Product extends BaseModel {
       'validate_available',
       'validate_producer',
       'validate_description',
-      'validate countryoforigin');
+      'validate_countryoforigin');
 	}
 
   public function errors() {
@@ -50,22 +50,45 @@ class Product extends BaseModel {
   	return $query[0]['id'];
   }
 
-  public static function update($row) {
-    $query = DB::query("UPDATE Product 
-          SET(
-            name =':name',
-            type=':type',
-            price=:price,
-            available=:available,
-            producer=':producer',
-            description=':description',
-            countryoforigin=':countryoforigin',
-            updated=NOW()) 
-          WHERE id = :entry_id", $row);
+  public static function updatenew($params) {
+    // ei oikeasti päivitä?
+    DB::query("UPDATE Product 
+            SET (name,type,price,available,producer,description,countryoforigin,updated)
+            VALUES (:name, :type, :price, :available, :producer, :description, :countryoforigin, NOW())
+            WHERE id = :id", $params) or die("Cannot update.");
+  }
+
+  public static function update($params) {
+    // siisti loopiksi?
+    $sql = "UPDATE Product SET ";
+    if($params['name']) {
+      $sql = $sql . "name='".$params['name']."', ";
+    }
+    if($params['type']) {
+      $sql = $sql . "type='".$params['type']."', ";
+    }
+    if($params['price']) {
+      $sql = $sql . "price=".$params['price'].",";
+    }
+    if($params['available']) {
+      $sql = $sql . "available=".$params['available'].",";
+    }
+    if($params['producer']) {
+      $sql = $sql . "producer='".$params['producer']."', ";
+    }
+    if($params['description']) {
+      $sql = $sql . "description='".$params['description']."', ";
+    }
+    if($params['countryoforigin']) {
+      $sql = $sql . "countryoforigin='".$params['countryoforigin']."', ";
+    }
+
+    $sql = $sql . "updated=NOW() WHERE id = ".$params['id'];
+    $query = DB::query($sql) or die("Update failed. the SQL was $sql");
   }
 
   public static function destroy($id) {
-    $rows = DB::query('DELETE Product WHERE id = :id', array('id' = $id));
+    $rows = DB::query('DELETE FROM Product WHERE id = :id', array('id' => $id));
   }
 
   public static function all() {
@@ -109,9 +132,11 @@ class Product extends BaseModel {
       $errors[] = 'Tuotteen nimen pituuden tulee olla vähintään neljä merkkiä';
     }
 
-    $matchingtypes = self::findUsedNames($this->name);
-    if ($matchingtypes) {
-      $errors[] = 'Tuote nimeltä ' . $this->name . ' on jo olemassa!';    
+    $matchingNames = self::findUsedNames($this->name);
+    if ($matchingNames && $this->id != null) {
+      if($this->id != $matchingNames->id) {
+        $errors[] = 'Tuote nimeltä ' . $this->name . ' on jo olemassa!';    
+      }
     }
 
     return $errors;
@@ -170,7 +195,7 @@ class Product extends BaseModel {
 
   public function validate_countryoforigin($errors) {
     if ($this->countryoforigin == null || strlen($this->countryoforigin) < 5) {
-      $errors[] = 'Tuotantomaan nimen pituuden tulee olla vähintään viisi merkkiä';
+      $errors[] = 'Valmistusmaan nimen pituuden tulee olla vähintään viisi merkkiä';
     }
 
     return $errors;

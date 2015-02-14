@@ -21,7 +21,7 @@ class User extends BaseModel {
 		$rows = DB::query('SELECT User 
 			                WHERE name = :name AND password = :password
 			                RETURNING id',
-			                array('id' = $name, 'password' = $password));
+			                array('id' => $name, 'password' => $password));
 	    if(count($rows) > 0) {
 	    	return $rows[0]['id'];
 	    } else {
