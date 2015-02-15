@@ -7,9 +7,11 @@
   </div>
   {% endif %}
   <!-- Painikkeet tähän -->
+  {% if user_logged_in %}
   <p>
     <a href="{{base_path}}/product/{{product.id}}/addtocart" class="btn btn-default">Lisää ostoskassiin</button></a>
   </p>
+  {% endif %}
   <h1>{{product.name}}</h1>
   <h4>tuotetyyppi: <a href="{{base_path}}/product&type={{product.type}}"><strong>{{product.type}}</strong></a></h2>
   <!-- Tiedot tulee listana tähän -->
@@ -24,7 +26,8 @@
   <p>{{product.description}}
   </p>
 
-  
+  {% if admin_logged_in %}
   <a href="{{base_path}}/product/{{product.id}}/edit" class="btn btn-default">Muokkaa</a> <form method="post" action="{{base_path}}/product/{{product.id}}/destroy"> <button type="submit" class="btn btn-danger">Poista tuote</button>
+  {% endif %}
 </form>
 {% endblock %}

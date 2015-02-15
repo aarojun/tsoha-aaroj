@@ -1,10 +1,14 @@
-{% extends "base.html" %}
+{% extends "base_form.html" %}
 
-{% block content %}
+{% block form_header %}
 
 {% if user_logged_in %}
 <h1>Käyttäjän {{user_logged_in.name}} ostoskori</h1>
 {% endif %}
+
+{% endblock %}
+
+{% block form_fields %}
 
   <table class="table table-striped table-bordered">
     <thead>

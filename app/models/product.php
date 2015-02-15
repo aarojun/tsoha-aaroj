@@ -98,8 +98,7 @@ class Product extends BaseModel {
     $rows = DB::query('SELECT * FROM Product WHERE id = :id LIMIT 1', array('id' => $id));
 
     if(count($rows) > 0){
-      $products = self::formProducts($rows);
-      return $products[0];
+      return new Product($rows[0]);
     }
 
     return null;

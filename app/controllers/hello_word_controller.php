@@ -43,6 +43,7 @@
     }
 
     public static function ostoskassi(){
+      self::check_logged_in();
       self::render_view('suunnitelmat/ostoskassi.html');
     }
 

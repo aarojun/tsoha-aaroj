@@ -16,10 +16,13 @@
   <small>tuotetyypille {{type}}</small>
  {% endif %}
  </h2>
+
+ {% if admin_logged_in %}
  <p>
     <a href="{{base_path}}/product/new" class="btn btn-success">Lisää tuote</a>
     <a href="{{base_path}}/product_type/new" class="btn btn-success">Lisää tuotetyyppi</a>
  </p>
+ {% endif %}
 
   <table class="table table-hover table-striped table-bordered">
     <thead>
@@ -45,8 +48,14 @@
         <td>{{product.countryoforigin}}</td>
         <td>~ {{product.available}}</td>
         <td>{{product.added}}</td>
+        
+        {% if user_logged_in %}
         <th><a class="btn btn-default btn-sm" href="{{base_path}}/product/{{product.id}}/addtocart">Lisää ostoskassiin</a></th>
+        {% endif %}
+
+        {% if admin_logged_in %}
         <th><a class="btn btn-default btn-sm" href="{{base_path}}/product/{{product.id}}/edit">Muokkaa</a></th>
+        {% endif %}
       </tr>
       {% endfor %}
     </tbody>

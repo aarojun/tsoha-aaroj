@@ -15,6 +15,8 @@ class ProductTypeController extends BaseController{
 	}
 
 	public static function store() {
+		self::check_admin();
+		
 		$params = $_POST;
 
 		// toteutetaan validointi syötteelle
@@ -35,10 +37,14 @@ class ProductTypeController extends BaseController{
     }
 
 	public static function create() {
+		self::check_admin();
+
 		self::render_view('product_type/new.html');
 	}
 
 	public static function destroy() {
+		self::check_admin();
+
 		$messages = array();
 		$messages[] = 'Tuotetyyppi on poistettu onnistuneesti!';
 		self::redirect_to('product_type', array('messages' => $messages));

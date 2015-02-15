@@ -32,6 +32,10 @@
     UserController::handle_login();
   });
 
+  $app->post('/logout', function() {
+    UserController::logout();
+  });
+
   $app->get('/product/:id/edit', function($id){
     ProductController::edit($id);
   });
@@ -74,7 +78,7 @@
   });
 
   $app->get('/ostoskassi', function() {
-    HelloWorldController::ostoskassi();
+    OrderController::ostoskassi();
   });
 
   $app->get('/product_show', function() {

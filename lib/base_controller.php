@@ -5,27 +5,41 @@
     public static function get_user_logged_in(){
       // Katsotaan onko user-avain sessiossa
       if(isset($_SESSION['user'])){
-        $user_id = $_SESSION['user'];
         // Pyydetään User-mallilta käyttäjä session mukaisella id:llä
-        $user = User::find($user_id);
+        $userid = $_SESSION['user'];
 
-        return $user;
-      }
-
+        return User::find($userid);
+      } else {
       // Käyttäjä ei ole kirjautunut sisään
       return null;
+      }
+    }
+
+    public static function get_admin_logged_in(){
+      // Katsotaan onko user-avain sessiossa
+      if(isset($_SESSION['admin'])){
+        $adminid = $_SESSION['admin'];
+
+        return User::findAdmin($adminid);
+      } else {
+      // Käyttäjä ei ole kirjautunut sisään administraattorina
+      return null;
+      }
     }
 
     public static function check_logged_in(){
       // toteuttaa kirjautumisen tarkistamisen
       if(!isset($_SESSION['user'])){
         self::redirect_to('/login', array('messages' => array('Kirjaudu ensin sisään!')));
+        return false;
       }
+      return true;
     }
 
     public static function check_admin(){
       // palauttaa tosi jos kirjautuneella käyttäjällä on admin-oikeudet
       if(!isset($_SESSION['admin'])){
+        self::redirect_to('/login', array('messages' => array('Pääsy vain henkilökunnalle!')));
         return false;
       }
       return true;
@@ -51,9 +65,9 @@
 
         $content['base_path'] = self::base_path();
 
-        if(method_exists(__CLASS__, 'get_user_logged_in')){
-          $content['user_logged_in'] = self::get_user_logged_in();
-        }
+        $content['user_logged_in'] = self::get_user_logged_in();
+        $content['admin_logged_in'] = self::get_admin_logged_in();
+        
 
         echo $twig->render($view, $content);
       } catch (Exception $e){
