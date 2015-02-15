@@ -6,9 +6,9 @@
       // Katsotaan onko user-avain sessiossa
       if(isset($_SESSION['user'])){
         // Pyydetään User-mallilta käyttäjä session mukaisella id:llä
-        $userid = $_SESSION['user'];
+        $user = $_SESSION['user'];
 
-        return User::find($userid);
+        return $user;
       } else {
       // Käyttäjä ei ole kirjautunut sisään
       return null;
@@ -18,9 +18,9 @@
     public static function get_admin_logged_in(){
       // Katsotaan onko user-avain sessiossa
       if(isset($_SESSION['admin'])){
-        $adminid = $_SESSION['admin'];
+        $admin = $_SESSION['admin'];
 
-        return User::findAdmin($adminid);
+        return $admin;
       } else {
       // Käyttäjä ei ole kirjautunut sisään administraattorina
       return null;

@@ -22,7 +22,7 @@
 
   <body>
 
-    <nav class="navbar navbar-default" role="navigation">
+    <nav class="navbar navbar-inverse" role="navigation">
       <div class="container-fluid">
 
         <div class="navbar-header">
@@ -39,15 +39,15 @@
         <div class="collapse navbar-collapse" id="navigation">
           <ul class="nav navbar-nav">
             <!-- Navigaation linkit -->
-            <li><a href="{{base_path}}/product">tuotteet</a></li>
+            <li><a href="{{base_path}}/product">tuotelista</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             {% if user_logged_in %}
-              <li>Käyttäjä: {{user_logged_in.name}}</li>          
+              <p class="navbar-text navbar-right">Käyttäjä: {{user_logged_in.name}}</p>          
               <li><a href="{{base_path}}/ostoskassi">Ostoskassi</a></li>
             {% endif %}
             {% if admin_logged_in %}
-              <li>Admin: {{admin_logged_in.name}}</li>
+              <p class="navbar-text navbar-right">Admin: {{admin_logged_in.name}}</p>  
             {% endif %}
             {% if user_logged_in or admin_logged_in %}
               <form class="navbar-form navbar-right" method="post" action="{{base_path}}/logout">

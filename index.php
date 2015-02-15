@@ -1,5 +1,8 @@
 <?php
 
+  // Otetaan Composer käyttöön
+  require 'vendor/autoload.php';
+
   // Luodaan uusi tai palautetaan olemassaoleva sessio
   if(session_id() == '') {
     session_start();
@@ -7,9 +10,6 @@
 
   // Asetetaan vastauksen Content-Type-otsake, jotta ääkköset näkyvät normaalisti
   header('Content-Type: text/html; charset=utf-8');
-
-  // Otetaan Composer käyttöön
-  require 'vendor/autoload.php';
 
   \Slim\Slim::registerAutoloader();
 
