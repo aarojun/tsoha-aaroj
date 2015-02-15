@@ -50,37 +50,29 @@ class Product extends BaseModel {
   	return $query[0]['id'];
   }
 
-  public static function updatenew($params) {
-    // ei oikeasti päivitä?
-    DB::query("UPDATE Product 
-            SET (name,type,price,available,producer,description,countryoforigin,updated)
-            VALUES (:name, :type, :price, :available, :producer, :description, :countryoforigin, NOW())
-            WHERE id = :id", $params) or die("Cannot update.");
-  }
-
   public static function update($params) {
     // siisti loopiksi?
     $sql = "UPDATE Product SET ";
     if($params['name']) {
-      $sql = $sql . "name='".$params['name']."', ";
+      $sql .= "name='".$params['name']."', ";
     }
     if($params['type']) {
-      $sql = $sql . "type='".$params['type']."', ";
+      $sql .= "type='".$params['type']."', ";
     }
     if($params['price']) {
-      $sql = $sql . "price=".$params['price'].",";
+      $sql .= "price=".$params['price'].",";
     }
     if($params['available']) {
-      $sql = $sql . "available=".$params['available'].",";
+      $sql .= "available=".$params['available'].",";
     }
     if($params['producer']) {
-      $sql = $sql . "producer='".$params['producer']."', ";
+      $sql .= "producer='".$params['producer']."', ";
     }
     if($params['description']) {
-      $sql = $sql . "description='".$params['description']."', ";
+      $sql .= "description='".$params['description']."', ";
     }
     if($params['countryoforigin']) {
-      $sql = $sql . "countryoforigin='".$params['countryoforigin']."', ";
+      $sql .= "countryoforigin='".$params['countryoforigin']."', ";
     }
 
     $sql = $sql . "updated=NOW() WHERE id = ".$params['id'];

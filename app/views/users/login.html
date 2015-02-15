@@ -1,7 +1,26 @@
 {% extends "base_form.html" %}
 
 {% block form_header %}
+<h1>Kirjaudu sisään</h1>
 {% endblock %}
 
 {% block form_fields %}
+ <form method="post" action="{{base_path}}/user">
+ 	<div class="form-group">
+ 		<label>Käyttäjätunnus</label>
+ 		<input type="text" name="username" class="form-control">
+    </div>
+
+    <div class="form-group">
+      <label>Salasana</label>
+      <input type="password" name="password" class="form-control">
+    </div>
+
+    <div class="form-group">
+      <input type="radio" name="usertype" value="user" checked>Asiakas 
+      <input type="radio" name="usertype" value="admin">Henkilökunta
+    </div>
+
+    <button type="submit" class="btn btn-primary">Kirjaudu sisään</button>
+  </form>
 {% endblock %}

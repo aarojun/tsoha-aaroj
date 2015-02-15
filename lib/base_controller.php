@@ -3,12 +3,32 @@
   class BaseController{
 
     public static function get_user_logged_in(){
-      // Toteuta kirjautuneen käyttäjän haku tähän
+      // Katsotaan onko user-avain sessiossa
+      if(isset($_SESSION['user'])){
+        $user_id = $_SESSION['user'];
+        // Pyydetään User-mallilta käyttäjä session mukaisella id:llä
+        $user = User::find($user_id);
+
+        return $user;
+      }
+
+      // Käyttäjä ei ole kirjautunut sisään
       return null;
     }
 
     public static function check_logged_in(){
-      // Toteuta kirjautumisen tarkistus tähän
+      // toteuttaa kirjautumisen tarkistamisen
+      if(!isset($_SESSION['user'])){
+        self::redirect_to('/login', array('messages' => array('Kirjaudu ensin sisään!')));
+      }
+    }
+
+    public static function check_admin(){
+      // palauttaa tosi jos kirjautuneella käyttäjällä on admin-oikeudet
+      if(!isset($_SESSION['admin'])){
+        return false;
+      }
+      return true;
     }
 
     public static function render_view($view, $content = array()){

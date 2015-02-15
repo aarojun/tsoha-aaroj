@@ -1,6 +1,15 @@
 {% extends "base.html" %}
 
 {% block content %}
+ {% if messages %}
+       <div class="alert alert-success">
+        <ul>
+          {% for message in messages %}
+            <li>{{message}}</li>
+          {% endfor %}
+        </ul>
+       </div>
+  {% endif %}
 
  <h2>Tax-Free tuotteet
  {% if type is not null %}

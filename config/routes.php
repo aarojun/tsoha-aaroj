@@ -28,6 +28,10 @@
     ProductTypeController::destroy($id);
   });
 
+  $app->post('/user', function() {
+    UserController::handle_login();
+  });
+
   $app->get('/product/:id/edit', function($id){
     ProductController::edit($id);
   });
@@ -62,7 +66,7 @@
   });
 
   $app->get('/login', function() {
-    HelloWorldController::login();
+    UserController::login();
   });
 
   $app->get('/tuotelista', function() {
