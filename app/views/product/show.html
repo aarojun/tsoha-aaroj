@@ -22,12 +22,18 @@
     <li><strong>Saatavilla: ~ </strong>{{product.available}}</li>
   </ul>
 
+  <ul>
+    <li><strong>Lisätty: </strong>{{product.added}}</li>
+    <li><strong>Päivitetty: </strong>{{product.updated}}</li>
+  </ul>
+
   Tuotteen kuvaus:
   <p>{{product.description}}
   </p>
 
   {% if admin_logged_in %}
-  <a href="{{base_path}}/product/{{product.id}}/edit" class="btn btn-default">Muokkaa</a> <form method="post" action="{{base_path}}/product/{{product.id}}/destroy"> <button type="submit" class="btn btn-danger">Poista tuote</button>
+  <a href="{{base_path}}/product/{{product.id}}/edit" class="btn btn-default">Muokkaa</a>
+  <form method="post" action="{{base_path}}/product/{{product.id}}/destroy"> <button type="submit" class="btn btn-danger">Poista tuote</button>
   {% endif %}
 </form>
 {% endblock %}

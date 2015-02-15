@@ -85,12 +85,14 @@ class Product extends BaseModel {
 
   public static function all() {
   	// kutsutaan luokan DB staattista metodia query
-	$rows = DB::query('SELECT * FROM Product');
+	$rows = DB::query('SELECT * FROM Product 
+                     ORDER BY added DESC');
 	return self::formProducts($rows);
    }
 
    public static function matchesType($type) {
-   	$rows = DB::query('SELECT * FROM Product WHERE type = :type', array('type' => $type));
+   	$rows = DB::query('SELECT * FROM Product WHERE type = :type
+                       ORDER BY name', array('type' => $type));
     return self::formProducts($rows);
    }
 

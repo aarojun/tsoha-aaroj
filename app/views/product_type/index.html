@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+ {% if messages %}
+       <div class="alert alert-success">
+        <ul>
+          {% for message in messages %}
+            <li>{{message}}</li>
+          {% endfor %}
+        </ul>
+       </div>
+  {% endif %}
+
+ <h2>Myynnissä olevat tuotetyypit
+ </h2>
+
+ {% if admin_logged_in %}
+ <p>
+    <a href="{{base_path}}/product_type/new" class="btn btn-success">Lisää tuotetyyppi</a>
+ </p>
+ {% endif %}
+
+  <table class="table table-hover table-striped table-bordered">
+    <thead>
+      <tr>
+        <th>Nimi</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <!-- Listataan tietokannassa olevat tuotteet tähän -->
+      {% for type in types %}
+        <tr>
+          <td><a href="{{base_path}}/product&type={{type.name}}">{{type.name}}</a></td>
+
+          {% if admin_logged_in %}
+            <th><form method="post" action="{{base_path}}/product_type/{{type.id}}/destroy"><button type="submit" class="btn btn-danger">Poista</button></th>
+          {% endif %}
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

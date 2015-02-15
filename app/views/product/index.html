@@ -48,9 +48,9 @@
         <td>{{product.countryoforigin}}</td>
         <td>~ {{product.available}}</td>
         <td>{{product.added}}</td>
-        
+
         {% if user_logged_in %}
-        <th><a class="btn btn-default btn-sm" href="{{base_path}}/product/{{product.id}}/addtocart">Lisää ostoskassiin</a></th>
+        <th><a class="btn btn-default btn-sm" href="{{base_path}}/order/{{product.id}}/add">Lisää ostoskassiin</a></th>
         {% endif %}
 
         {% if admin_logged_in %}

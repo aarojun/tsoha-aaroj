@@ -52,6 +52,10 @@
     ProductTypeController::create();
   });
 
+  $app->get('/product_type', function(){
+    ProductTypeController::index();
+  });
+
   $app->get('/product&type=:type', function($type) {
     ProductController::indexByType($type);
   });

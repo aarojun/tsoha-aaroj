@@ -2,7 +2,7 @@
 
 class ProductType extends BaseModel {
     // tuotteen atribuutit
-	public $name;
+	public $id, $name;
 
 	public function __construct($attributes) {
 	  parent::__construct($attributes);
@@ -32,6 +32,10 @@ class ProductType extends BaseModel {
   		    VALUES(:name) RETURNING name", $row);
 
   	return $query[0]['name'];
+  }
+
+  public static function destroy($id) {
+    $rows = DB::query('DELETE FROM ProductType WHERE id = :id', array('id' => $id));
   }
 
   public static function all() {
