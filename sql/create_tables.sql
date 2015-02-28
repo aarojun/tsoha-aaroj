@@ -28,7 +28,7 @@ CREATE TABLE ProductType(
 CREATE TABLE Product(
   id SERIAL PRIMARY KEY,
   name varchar(50) UNIQUE NOT NULL ,
-  type varchar(50) REFERENCES ProductType(id),
+  type varchar(50) REFERENCES ProductType(name),
   price NUMERIC,
   available INTEGER NOT NULL,
   producer varchar(50),
@@ -38,7 +38,7 @@ CREATE TABLE Product(
   updated DATE
 );
 
-CREATE TABLE Tilaus(
+CREATE TABLE Orders (
   id SERIAL PRIMARY KEY,
   product INTEGER REFERENCES Product(id) NOT NULL,
   customer INTEGER REFERENCES Customer(id) NOT NULL,
