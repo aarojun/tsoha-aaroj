@@ -16,23 +16,26 @@
         <th>Nimi</th>
         <th>Hinta</th>
         <th>Määrä</th>
-        <th>Tuotetyyppi</th>
-        <th>Valmistaja</th>
-        <th>Valmistusmaa</th>
+        <th>Kokonaishinta</th>
       </tr>
     </thead>
 
     <tbody>
       <!-- Listataan ostoskorissa olevat tuotteet tähän -->
-      <tr>
-        <td><a href="#">Toblerone suklaa - valkoinen</a></td>
-        <td>€3.00</td>
-        <td>2</td>
-        <td>Makeiset</td>
-        <td>Mondelez Schweiz GmbH</td>
-        <td>Sveitsi</td>
-        <th><a class="btn btn-default btn-sm" href="#">Poista korista</a></th>
+      {% set sumofprices = 0 %}
+      {% for order in orders %}
+        <tr>
+          <td><a href="{{base_path}}/product/{{order.product.id}}">{{order.product.name}}</a></td>
+          <td>{{order.product.price}}</td>
+          <td>{{order.quantity}}</td>
+          {% set totalprice = order.product.price*order.quantity %}
+          {% set sumofprices = totalprice + sumofprices %}
+          <td>{{totalprice}}</td>
+          <th><form method="post" action="{{base_path}}/ostoskassi/{{type.id}}/destroy"><button type="submit" class="btn btn-danger">Poista korista</button></th>
       </tr>
+      {% endfor %}
     </tbody>
   </table>
+
+  <h4>Ostosten kokonaishinta: {{sumofprices}}</h4>
 {% endblock %}

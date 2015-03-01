@@ -15,3 +15,4 @@ INSERT INTO Product (name, type, available, price, added) VALUES ('Toblerone suk
 INSERT INTO Product (name, type, available, price, added) VALUES ('Kirja', 'testi', 7, 3.00, NOW());
 
 -- Tilaus-taulun testidata
+INSERT INTO Orders (product, customer, quantity) VALUES (1, 1, 3);

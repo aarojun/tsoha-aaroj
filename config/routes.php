@@ -24,8 +24,16 @@
     ProductController::destroy($id);
   });
 
+  $app->post('/ostoskassi/:id/addtocart', function($id) {
+    OrdersController::addtocart($id);
+  });
+
   $app->post('/product_type/:id/destroy', function($id){
     ProductTypeController::destroy($id);
+  });
+
+  $app->post('/ostoskassi/:id/destroy', function($id) {
+    OrdersController::destroy($id);
   });
 
   $app->post('/user', function() {
@@ -34,6 +42,10 @@
 
   $app->post('/logout', function() {
     UserController::logout();
+  });
+
+  $app->get('/ostoskassi', function() {
+    OrdersController::indexByUser();
   });
 
   $app->get('/product/:id/edit', function($id){
@@ -75,24 +87,4 @@
 
   $app->get('/login', function() {
     UserController::login();
-  });
-
-  $app->get('/tuotelista', function() {
-    HelloWorldController::tuotelista();
-  });
-
-  $app->get('/ostoskassi', function() {
-    OrderController::ostoskassi();
-  });
-
-  $app->get('/product_show', function() {
-    HelloWorldController::product_show();
-  });
-
-  $app->get('/product_modify', function() {
-    HelloWorldController::product_modify();
-  });
-
-  $app->get('/product_add', function() {
-    HelloWorldController::product_add();
   });
