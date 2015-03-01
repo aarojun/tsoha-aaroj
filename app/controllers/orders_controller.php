@@ -49,7 +49,7 @@ class OrdersController extends BaseController{
       self::check_logged_in();
 
       // tarkistetaan vastaako tilaus pyyntöä tekevää käyttäjää
-      if(self::matchesUser()) {
+      if(self::matchesUser($orderid)) {
       	// tilaus vastaa käyttäjää joten poistetaan se
       	Orders::destroy($orderid);
       	$messages = array();

@@ -40,7 +40,7 @@
             {% set sumofprices = totalprice + sumofprices %}
             <td>€ {{totalprice}}</td>
             <th><button type="submit" class="btn btn-primary">päivitä</button></form></th>
-            <th><form method="post" action="{{base_path}}/ostoskassi/{{order.id}}/destroy"><button type="submit" class="btn btn-danger">Poista korista</button></th>
+            <th><form method="post" action="{{base_path}}/ostoskassi/{{order.id}}/destroy"><button type="submit" class="btn btn-danger">poista korista</button></th>
           </tr>
         {% endfor %}
     </tbody>
