@@ -29,10 +29,17 @@
           <tr>
             <td><a href="{{base_path}}/product/{{order.product.id}}">{{order.product.name}}</a></td>
             <td>€ {{order.product.price}}</td>
-            <td>{{order.quantity}}</td>
+
+            <td>
+              <!-- Käyttäjä voi muuttaa tilattavien tuotteiden lukumäärää -->
+              <form method="post" action="{{base_path}}/ostoskassi/{{order.id}}">
+              <input type="number" name="quantity" class="form-control" value="{{order.quantity}}">
+            </td>
+
             {% set totalprice = order.product.price*order.quantity %}
             {% set sumofprices = totalprice + sumofprices %}
             <td>€ {{totalprice}}</td>
+            <th><button type="submit" class="btn btn-primary">päivitä</button></form></th>
             <th><form method="post" action="{{base_path}}/ostoskassi/{{order.id}}/destroy"><button type="submit" class="btn btn-danger">Poista korista</button></th>
           </tr>
         {% endfor %}

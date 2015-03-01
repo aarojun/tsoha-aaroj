@@ -36,6 +36,10 @@ class Orders extends BaseModel {
     return $query[0]['id'];
   }
 
+  public static function update($orderid, $quantity) {
+    $query = DB::query("UPDATE Orders SET quantity = :quantity WHERE id = :id", array('id' => $orderid, 'quantity' => $quantity));
+  }
+
   public static function destroy($id) {
     $rows = DB::query('DELETE FROM Orders WHERE id = :id', array('id' => $id));
   }

@@ -49,10 +49,7 @@ class OrdersController extends BaseController{
       self::check_logged_in();
 
       // tarkistetaan vastaako tilaus pyyntöä tekevää käyttäjää
-      $order = Orders::find($orderid);
-      $userid = $_SESSION['user']->id;
-
-      if($order->customer == $userid) {
+      if(self::matchesUser()) {
       	// tilaus vastaa käyttäjää joten poistetaan se
       	Orders::destroy($orderid);
       	$messages = array();
@@ -63,5 +60,45 @@ class OrdersController extends BaseController{
         $errors[] = 'Käyttäjälläsi ei ole oikeuksia poistaa annettua tilausta';
         self::redirect_to('/ostoskassi', array('errors' => $errors));
       }
+    }
+
+    public static function matchesUser($orderid) {
+    	// tarkistaa onko nykyinen käyttäjä tilaukseen liitetty asiakas
+    	$order = Orders::find($orderid);
+        $userid = $_SESSION['user']->id;
+        if($order->customer == $userid) {
+        	return true;
+        } else {
+        	return false;
+        }
+    }
+
+    public static function update($orderid) {
+    	self::check_logged_in();
+
+        if(self::matchesUser($orderid)) {
+      	  // tilaus vastaa käyttäjää
+      	  $newquantity = intval($_POST['quantity']);
+
+          $order = Orders::find($orderid);
+          $order->quantity = $newquantity;
+
+          $errors = $order->errors();
+
+          if($errors == null) {
+
+            Orders::update($orderid, $newquantity);
+      	    $messages = array();
+            $messages[] = 'Tilauksen lukumäärä on päivitetty';
+            self::redirect_to('/ostoskassi', array('messages' => $messages));
+          } else {
+          	self::redirect_to('/ostoskassi', array('errors' => $errors));
+          }
+        } else {
+          // tilaus ei vastannut käyttäjää
+          $errors = array();
+          $errors[] = 'Käyttäjälläsi ei ole oikeuksia muokata annettua tilausta';
+          self::redirect_to('/ostoskassi', array('errors' => $errors));
+        }
     }
 }

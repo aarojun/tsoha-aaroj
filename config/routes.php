@@ -36,6 +36,10 @@
     OrdersController::destroy($id);
   });
 
+  $app->post('/ostoskassi/:id', function($id) {
+    OrdersController::update($id);
+  });
+
   $app->post('/user', function() {
     UserController::handle_login();
   });
