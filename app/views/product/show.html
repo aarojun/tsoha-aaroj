@@ -9,7 +9,7 @@
   <!-- Painikkeet tähän -->
   {% if user_logged_in %}
   <p>
-    <a href="{{base_path}}/product/{{product.id}}/addtocart" class="btn btn-default">Lisää ostoskassiin</button></a>
+    <th><form method="post" action="{{base_path}}/ostoskassi/{{product.id}}/addtocart"><button type="submit" class="btn btn-default btn-sm">Lisää ostoskassiin</button></form></th>
   </p>
   {% endif %}
   <h1>{{product.name}}</h1>
