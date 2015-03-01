@@ -34,7 +34,7 @@
           <td><a href="{{base_path}}/product&type={{type.name}}">{{type.name}}</a></td>
 
           {% if admin_logged_in %}
-            <th><form method="post" action="{{base_path}}/product_type/{{type.id}}/destroy"><button type="submit" class="btn btn-danger">Poista</button></th>
+            <th><form method="post" action="{{base_path}}/product_type/{{type.id}}/destroy"><button type="submit" class="btn btn-danger">Poista</button></form></th>
           {% endif %}
         </tr>
       {% endfor %}

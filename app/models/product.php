@@ -123,6 +123,8 @@ class Product extends BaseModel {
     }
     if (strlen($this->name) < 4) {
       $errors[] = 'Tuotteen nimen pituuden tulee olla vähintään neljä merkkiä';
+    } else if (strlen($this->name) >20) {
+      $errors[] = 'Tuotteen nimen pituuden tulee enintään 20 merkkiä';
     }
 
     $matchingNames = self::findUsedNames($this->name);
@@ -175,6 +177,8 @@ class Product extends BaseModel {
 
     if ($this->producer && strlen($this->producer) < 4) {
       $errors[] = 'Tuottajan nimen pituuden tulee olla vähintään neljä merkkiä';
+    } else if ($this->producer && strlen($this->producer) > 20) {
+      $errors[] = 'Tuottajan nimen pituuden tulee olla enintään 20 merkkiä';
     }
 
     return $errors;
@@ -183,12 +187,18 @@ class Product extends BaseModel {
   public function validate_description($errors) {
     //valinnainen kenttä
 
+    if ($this->producer && strlen($this->producer) > 400) {
+      $errors[] = 'Tuotteen kuvauksen pituuden tulee olla enintään 400 merkkiä';
+    }
+
     return $errors;
   }
 
   public function validate_countryoforigin($errors) {
     if ($this->countryoforigin == null || strlen($this->countryoforigin) < 5) {
       $errors[] = 'Valmistusmaan nimen pituuden tulee olla vähintään viisi merkkiä';
+    } else if (strlen($this->countryoforigin) > 20) {
+      $errors[] = 'Valmistusmaan nimen pituuden tulee olla enintään 20 merkkiä';
     }
 
     return $errors;

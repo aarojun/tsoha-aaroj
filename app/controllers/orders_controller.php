@@ -54,7 +54,7 @@ class OrdersController extends BaseController{
 
       if($order->customer == $userid) {
       	// tilaus vastaa käyttäjää joten poistetaan se
-      	Orders::destroy($id);
+      	Orders::destroy($orderid);
       	$messages = array();
         $messages[] = 'Tilaus on poistettu ostoskorista';
         self::redirect_to('/ostoskassi', array('messages' => $messages));

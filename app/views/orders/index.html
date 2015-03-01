@@ -31,7 +31,7 @@
           {% set totalprice = order.product.price*order.quantity %}
           {% set sumofprices = totalprice + sumofprices %}
           <td>{{totalprice}}</td>
-          <th><form method="post" action="{{base_path}}/ostoskassi/{{type.id}}/destroy"><button type="submit" class="btn btn-danger">Poista korista</button></th>
+          <th><form method="post" action="{{base_path}}/ostoskassi/{{order.id}}/destroy"><button type="submit" class="btn btn-danger">Poista korista</button></th>
       </tr>
       {% endfor %}
     </tbody>

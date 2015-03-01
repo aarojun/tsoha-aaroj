@@ -2,22 +2,22 @@
 
 CREATE TABLE FlightInformation(
   id SERIAL PRIMARY KEY,
-  flightid varchar(50) NOT NULL,
+  flightid varchar(40) NOT NULL,
   seat INTEGER NOT NULL,
   active BOOLEAN DEFAULT TRUE
 );
 
 CREATE TABLE Customer(
   id SERIAL PRIMARY KEY,
-  name varchar(50) UNIQUE NOT NULL,
-  password varchar(50) NOT NULL,
+  name varchar(10) UNIQUE NOT NULL,
+  password varchar(10) NOT NULL,
   flightseating INTEGER REFERENCES FlightInformation(id)
 );
 
 CREATE TABLE Administrator(
   id SERIAL PRIMARY KEY,
-  name varchar(50) UNIQUE NOT NULL,
-  password varchar(50) NOT NULL
+  name varchar(10) UNIQUE NOT NULL,
+  password varchar(10) NOT NULL
 );
 
 CREATE TABLE ProductType(
@@ -27,13 +27,13 @@ CREATE TABLE ProductType(
 
 CREATE TABLE Product(
   id SERIAL PRIMARY KEY,
-  name varchar(50) UNIQUE NOT NULL ,
-  type varchar(50) REFERENCES ProductType(name),
+  name varchar(20) UNIQUE NOT NULL ,
+  type varchar(10) REFERENCES ProductType(name),
   price NUMERIC,
   available INTEGER NOT NULL,
-  producer varchar(50),
+  producer varchar(20),
   description varchar(400),
-  countryoforigin varchar(50),
+  countryoforigin varchar(20),
   added DATE,
   updated DATE
 );

@@ -72,6 +72,8 @@ class ProductType extends BaseModel {
     }
     if (strlen($this->name) < 4) {
       $errors[] = 'Nimen pituuden tulee olla vähintään neljä merkkiä';
+    } else if (strlen($this->name) > 10) {
+      $errors[] = 'Nimen pituuden tulee olla enintään kymmenen merkkiä';
     }
 
     $matchingtypes = self::findUsedNames($this->name);
